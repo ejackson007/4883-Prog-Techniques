@@ -6,4 +6,4 @@ The repository is organized by questions solved, as well a folder full of code s
 
 | Title | Question Link | Code Link | Place | Execution Time |
 | ----- | ------------- | --------- | ----- | -------------- |
-
+|       |               |           |       |                |
