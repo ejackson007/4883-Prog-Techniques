@@ -2,7 +2,7 @@
 
 In this problem we are calculating how much money is donated. With the input there are two distinct commands
 
-1. `'donate K'`
+1. `donate K`
 2. `report`
 
 If donate is written, than the integer _K_ is added to the total, and if report is written, than the total is printed.
