@@ -7,3 +7,4 @@ The repository is organized by questions solved, as well a folder full of code s
 | Title               | Question Link                       | Folder Link                    | Execution Time |
 | ------------------- | ----------------------------------- | ------------------------------ | -------------- |
 | Packing for Holiday | [uva](https://tinyurl.com/y49s6k58) | [Solution](/Assignments/12372) | 0.000s         |
+| Relational Operator | [uva](https://tinyurl.com/y23m7wc2) | [Solution](/Assignments/11172) | 0.000s         |
