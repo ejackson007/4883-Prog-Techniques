@@ -6,3 +6,4 @@
 | 11172 | [Solution](/Assignments/11172) | Relational Operator    |
 | 11498 | [Solution](/Assignments/11498) | Division of Nlogonia   |
 | 11727 | [Solution](/Assignments/11727) | Cost Cutting           |
+| 12403 | [Solution](/Assignments/12403) | Save Setu              |
