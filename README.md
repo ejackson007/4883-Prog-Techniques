@@ -1,8 +1,10 @@
 # 4883-Prog-Techniques
 
+![speed](https://tenor.com/view/neck-cat-speed-typing-gif-12496186)
+
 ## Organization
 
-The repository is organized by questions solved, as well a folder full of code snippets that will be useful for other programs. The table below will be edited as problems are solved and added
+The repository is organized by questions solved, as well a folder full of code snippets that will be useful for other programs. The table below will be edited as problems are solved.
 
 | Title                | Question Link                       | Folder Link                    | Execution Time |
 | -------------------- | ----------------------------------- | ------------------------------ | -------------- |
