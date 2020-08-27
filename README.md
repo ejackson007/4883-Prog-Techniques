@@ -1,6 +1,7 @@
 # 4883-Prog-Techniques
 
-![speed](https://tenor.com/view/neck-cat-speed-typing-gif-12496186)
+![speed]
+(https://tenor.com/view/neck-cat-speed-typing-gif-12496186)
 
 ## Organization
 
