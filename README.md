@@ -1,6 +1,6 @@
 # 4883-Prog-Techniques
 
-![speed](https://media.giphy.com/media/3BMQuulaTyA4W7iKZ2/source.mp4)
+![speed](https://media.giphy.com/media/1C8bHHJturSx2/source.gif)
 
 ## Organization
 
