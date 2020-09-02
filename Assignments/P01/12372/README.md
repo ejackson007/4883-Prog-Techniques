@@ -1,5 +1,11 @@
 # Packing for Holiday
 
+<object data="https://onlinejudge.org/external/123/12372.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://onlinejudge.org/external/123/12372.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://onlinejudge.org/external/123/12372.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
 In this program you are given the dimensions of an object, and are tasked to see if it would fit within a 20x20x20 suit case. The input is as follows:
 
 1. `T` how many lines of input
