@@ -45,7 +45,7 @@ int main()
             }
         }
         //after trying all cases or break
-        if (valid)
+        if (valid && stack.size() == 0)
             cout << "Yes\n";
         else
             cout << "No\n";

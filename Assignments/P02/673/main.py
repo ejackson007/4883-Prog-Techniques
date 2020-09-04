@@ -23,7 +23,7 @@ for _ in range(lines):
                 valid = False
                 break
     # after trying all cases
-    if(valid):
+    if(valid and len(stack) == 0):
         print('Yes')
     else:
         print('No')
