@@ -7,15 +7,22 @@ using namespace std;
 int main()
 {
     int count;
+    string temp;
     string sequence;
     vector<char> stack;
     bool valid;
 
-    cin >> count;
+    /*
+    get line allows for an empty input, however if cin is used, and then getline is used, the iterator
+    is not fixed, therefore it reads the first line again. getline with a temp string makes it a bit simpler
+    to implement, rather than moving the iterator. 
+    */
+    getline(cin, temp);
+    count = stoi(temp);
 
     for (int i = 0; i < count; i++)
     {
-        cin >> sequence;
+        getline(cin, sequence);
         valid = true;
         for (int j = 0; j < sequence.length(); j++)
         {
@@ -49,5 +56,6 @@ int main()
             cout << "Yes\n";
         else
             cout << "No\n";
+        stack.clear();
     }
 }
