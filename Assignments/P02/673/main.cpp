@@ -1,70 +1,53 @@
-//UVA 673
-
 #include <iostream>
-#include <stack>
+#include <vector>
+#include <string>
 
 using namespace std;
 
-int main(){
-    int lines;
-    string useCase;
-    bool works = true;
-    stack<char> stackInput;
+int main()
+{
+    int count;
+    string sequence;
+    vector<char> stack;
+    bool valid;
 
-    cin >> lines;
-    for(int i = 0; i < lines; i++){
-        cin >> useCase;
-        if(useCase.length() % 2 != 0){
-            works = false;
-            break;
-        }
-        else{
-            for(int j = 0; j < useCase.length(); j++){
-                while(works){
-                    switch(useCase[j]) {
-                        case '(': 
-                            stackInput.push('(');
-                            break;
-                        case ')':
-                            if(stackInput.empty())
-                                works = false;
-                            else{
-                                char temp = stackInput.top();
-                                stackInput.pop();
-                                if(temp == '('){
-                                    break;
-                                }
-                                else{
-                                    works = false;
-                                    break;
-                                }
-                            }
-                        case '[': 
-                            stackInput.push('[');
-                            break;
-                        case ']':
-                            if(stackInput.empty())
-                                works = false;
-                            else{
-                                char temp = stackInput.top();
-                                stackInput.pop();
-                                if(temp == '['){
-                                    break;
-                                }
-                                else{
-                                    works = false;
-                                    break;
-                                }
-                            }
-                    }
+    cin >> count;
+
+    for (int i = 0; i < count; i++)
+    {
+        cin >> sequence;
+        valid = true;
+        for (int j = 0; j < sequence.length(); j++)
+        {
+            if (sequence[j] == '(' || sequence[j] == '[')
+            {
+                stack.push_back(sequence[j]);
+            }
+            else
+            {
+                // if popping and stack is empty
+                if (stack.size() == 0)
+                {
+                    valid = false;
+                    break;
+                }
+                //check matching cases
+                else if (sequence[j] == ')' && stack.back() == '(')
+                    stack.pop_back();
+                else if (sequence[j] == ']' && stack.back() == '[')
+                    stack.pop_back();
+                //if doesnt match
+                else
+                {
+                    valid = false;
+                    break;
                 }
             }
         }
-        if(works)
+        //after trying all cases or break
+        if (valid)
             cout << "Yes\n";
         else
             cout << "No\n";
-        
-        works = true;
     }
 }
