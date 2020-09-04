@@ -3,7 +3,7 @@ stack = []
 
 for _ in range(lines):
     valid = True  # set to true before input
-    sequence = [char for char in input()]
+    sequence = input()
     for char in sequence:
         # append for opening
         if char == '(' or char == '[':
@@ -27,3 +27,4 @@ for _ in range(lines):
         print('Yes')
     else:
         print('No')
+    stack.clear()
