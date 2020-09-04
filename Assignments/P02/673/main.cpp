@@ -6,8 +6,7 @@ using namespace std;
 
 int main()
 {
-    int count;
-    string temp;
+    string count;
     string sequence;
     vector<char> stack;
     bool valid;
@@ -17,10 +16,9 @@ int main()
     is not fixed, therefore it reads the first line again. getline with a temp string makes it a bit simpler
     to implement, rather than moving the iterator. 
     */
-    getline(cin, temp);
-    count = stoi(temp);
+    getline(cin, count);
 
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < stoi(count); i++)
     {
         getline(cin, sequence);
         valid = true;
