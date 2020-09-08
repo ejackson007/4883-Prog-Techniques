@@ -1,7 +1,7 @@
-# This was done by reading the whole deck in first. It needs to be done by reading one card at a time
-
+# Changed to have current playing field. In a endless loop
 
 game = []
+playing_field = []
 completed = False
 prev_size = 52
 
@@ -29,22 +29,23 @@ while game[0][0] != '#':
     # read in line after # is not found
     [game.append([card]) for card in input().split()]
     # print(game)
-    while not completed:
-        for stacks in game:
+    for stacks in game:
+        playing_field.append(stacks)
+        while not completed:
             # priority to left most movement
-            if(game.index(stacks) >= 3):
-                if(stacks[-1][0] == get_left_rank(stacks, 3) or
-                   stacks[-1][1] == get_left_suit(stacks, 3)):
-                    stack_cards(stacks, 3)
-            elif(game.index(stacks) >= 1):
-                if(stacks[-1][0] == get_left_rank(stacks, 1) or
-                   stacks[-1][1] == get_left_suit(stacks, 1)):
-                    stack_cards(stacks, 1)
-        # check if the size of the game field changed
-        if(len(game) == prev_size):
-            completed = True
-        else:
-            prev_size = len(game)  # set current length
+            if(len(playing_field) >= 4):
+                if(playing_field[-1][-1][0] == get_left_rank(playing_field[-1], 3) or
+                   playing_field[-1][-1][1] == get_left_suit(playing_field[-1], 3)):
+                    stack_cards(playing_field[-1], 3)
+            elif(len(playing_field) >= 2):
+                if(playing_field[-1][-1][0] == get_left_rank(playing_field[-1], 1) or
+                   playing_field[-1][-1][1] == get_left_suit(playing_field[-1], 1)):
+                    stack_cards(playing_field[-1], 1)
+            # check if the size of the game field changed
+            if(len(playing_field) == prev_size):
+                completed = True
+            else:
+                prev_size = len(game)  # set current length
     # print results
     if(len(game) == 1):
         print("1 pile remaining: 52")
