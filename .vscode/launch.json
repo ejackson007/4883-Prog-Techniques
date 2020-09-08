@@ -12,20 +12,6 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "Python: Current File",
-      "type": "python",
-      "request": "launch",
-      "program": "${file}",
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "Python: Current File",
-      "type": "python",
-      "request": "launch",
-      "program": "${file}",
-      "console": "integratedTerminal"
-    },
-    {
       "name": "g++ - Build and debug active file",
       "type": "cppdbg",
       "request": "launch",
