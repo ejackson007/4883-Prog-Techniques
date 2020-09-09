@@ -2,9 +2,20 @@ import time
 start = time.perf_counter()
 deck = []
 
+# read in as a string
+# process string so that you never have a list thats 52 big
+
 [deck.append([card]) for card in input().split()]
+cards = input()
+
+# def temp():
+#     string = "6D QS AD 2D JD 4S 9H 3S TD 8H 2H TS 5H TC 5D 9S 7H 8C 8S 3C AC 2S 9C AH KD TH".replace(' ','')
+#     for c in range(0,52,2):
+#         print()
 
 while deck[0][0] != '#':
+    cards += input()
+
     [deck.append([card]) for card in input().split()]
 
     # stack with matching rank or suit.
