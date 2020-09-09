@@ -1,3 +1,5 @@
+import time
+start = time.perf_counter()
 deck = []
 
 [deck.append([card]) for card in input().split()]
@@ -33,3 +35,6 @@ while deck[0][0] != '#':
     # clear deck and cin first line of new deck
     deck.clear()
     [deck.append([card]) for card in input().split()]
+
+end = time.perf_counter()
+print(f'execution time: {end - start:0.4f}')
