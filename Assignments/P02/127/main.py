@@ -8,6 +8,7 @@ while deck[0][0] != '#':
     [deck.append([card]) for card in input().split()]
 
     # stack with matching rank or suit.
+    # must use while loop since for would not allow i to be decrimented
     i = 0
     while i < len(deck):
         # prioritize 3 move to left
