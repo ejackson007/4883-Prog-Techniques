@@ -11,22 +11,22 @@ int main()
     vector<vector<string> > deck(52);
     string card;
     bool run = true;
-    //cin first half of cards
-    for(int i = 0; i < 26; i++){
-        cin >> card;
-        deck[i].push_back(card);
-        if(card == "#"){
-            run = false;
-            break;
-        }
-    }
+
     //while not eof
     while(run){
         //cin second half of cards
-        for(int i = 26; i < 52; i++){
+        for(int i = 0; i < 52; i++){
             cin >> card;
-            deck[i].push_back(card);
+            if(card == "#"){
+                run = false;
+                i = 52;
+            }
+            else
+                deck[i].push_back(card);
+            
         }
+        if(!run)
+            break;
         //for cards in deck
         for(int i = 1; i < deck.size(); i++){
             //prioritize left most move
@@ -58,14 +58,6 @@ int main()
         //prepare for next time
         deck.clear();
         deck.resize(52);
-        for(int i = 0; i < 26; i++){
-            cin >> card;
-            deck[i].push_back(card);
-            if(card == "#"){
-                run = false;
-                break;
-            }
-        }
     }
     return 0;
 }
