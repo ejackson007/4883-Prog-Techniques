@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main(){
+void main(){
     string line, temp, finished = "";
     bool front = false;
 
@@ -54,5 +54,4 @@ int main(){
         cout << finished << endl;
         finished = "";
     }
-    return 0;
 }
