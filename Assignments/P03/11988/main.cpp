@@ -2,27 +2,62 @@
 //brackets inside of brackets however taken precidence and therefore a stack is needed?
 
 #include <iostream>
-#include <vector>
-#include <queue>
 #include <string>
 
 using namespace std;
 
 int main(){
-    string line, finished;
-    vector<char> stack; //main stack to keep track of stuff
-    queue<char> b;
-    int brackets = 0;
+    string line, temp, finished = "";
+    bool front = false;
 
     //while not EOF
     while(getline(cin, line)){
-        //loop for every character in string
+        //while more lines
         for(int i = 0; i < line.length(); i++){
-            //not in a bracket
-           if(brackets == 0){
-               
-           }
+            //push current letters and move cursor to front
+            if(line[i] == '['){
+                if(front){
+                    finished = temp + finished;
+                    temp = "";
+                    front = true;
+                }
+                else{
+                    finished = finished + temp;
+                    temp = "";
+                    front = true;
+                }
+            }
+            //push current letters and move cursor to back
+            else if(line[i] == ']'){
+                if(front){
+                    finished = temp + finished;
+                    temp = "";
+                    front = false;
+                }
+                else{
+                    finished = finished + temp;
+                    temp = "";
+                    front = false;
+                }
+            }
+            //not home or end, therefore add to current string to add
+            else{
+                temp += line[i];
+            }
         }
+        //no more letters in input. Push rest of letters at cursor
+        //and then print
+        if(front){
+            finished = temp + finished;
+            temp = "";
+            front = false;
+        }
+        else{
+            finished = finished + temp;
+            temp = "";
+        }
+        cout << finished << endl;
+        finished = "";
     }
     return 0;
 }
