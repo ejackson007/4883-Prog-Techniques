@@ -1,3 +1,11 @@
+/*
+I initially tired to use a string with concatenation, just for UVA to say it took to long,
+which led me to research efficiency in strings in c++. String concatenation is linear, which
+means that for huge strings that will also have lots of concatenations, this is extremely
+slow. This led me to implement a method which would allow me to move the cursor and write out the
+string as it is coming it saving memory allocation. A list also allows me to iterate through adding
+in values without explicitly knowing where they are going, just that they are next.
+*/
 #include <iostream>
 #include <list>
 
