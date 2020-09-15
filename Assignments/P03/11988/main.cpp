@@ -23,6 +23,7 @@ int main(){
         //put cursor at beginning of line
         list<char>::iterator cursor = completed.begin();
         //equivalent to for letters in line in python
+        //id assume that looping with address would be faster, however UVA disagrees
         for(char letter : line){
             //move cursor to HOME
             if(letter == '[')
@@ -34,7 +35,7 @@ int main(){
             else
                 completed.insert(cursor, letter);
         }
-        //print entire list
+        //print entire list. Loop by address to save from making a copy
         for(const char &l : completed){
             cout << l;
         }
