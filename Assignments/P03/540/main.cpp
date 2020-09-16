@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>
+#include <vector>
 
 #define endl '\n'
 
@@ -8,9 +8,11 @@ using namespace std;
 int main(){
     int t, team_size, member, s = 1;
     string command;
-    priority_queue<int> q;
+    vector<vector<int> > q;
     cin >> t;
     while(t != 0){
+        //create line size
+        q.resize(t);
         cout << "Scenario #" << s << endl;
         //create teams in team members.
         //this is important as a priority queue sorts into teams, it does not 
@@ -25,12 +27,10 @@ int main(){
         cin >> command;
         while(command != "STOP"){
             if(command == "ENQUEUE"){
-                cin >> member;
-                q.push(member);
+                //do something
             }
             else{
-                cout << q.top() << endl;
-                q.pop();
+                //do something
             }
             cin >> command;
         }
