@@ -6,19 +6,25 @@
 #include <vector>
 #include <queue>
 #include <unordered_map>
-#include <unordered_set>
+#include <set>
 
 #define endl '\n'
 
 using namespace std;
 
+void clear(queue<int> &q){
+    queue<int> empty;
+    swap(q, empty);
+}
+
 int main(){
     int t, team_size, member, s = 1;
     string command;
     //This will control the order. Instead of reordering the the entire line, a sperate
-    //list will keep track of what teams have which order. 
+    //queue will keep track of what teams have which order. a set will assure no duplicates
     vector<queue<int> > q;
-    unordered_set<int> order;
+    queue<int> line;
+    set<int> exists;
 
     unordered_map<int,int> teams;
     cin >> t;
@@ -41,22 +47,29 @@ int main(){
             //How do i know which queue to put it into?
             if(command == "ENQUEUE"){
                 cin >> member;
-                //add value to unordered set. since unordered set is unique values just push team value
-                order.insert(teams[member]);
+                //check if team is in set, if not add to queue, otherwise toss
+                if(exists.find(teams[member]) == exists.end()){
+                    exists.insert(teams[member]);
+                    line.push(teams[member]);
+                }
+                
                 //push member onto respective team stack
                 q[teams[member]].push(member);
             }
             else{
-                cout << q[*order.begin()].front() << endl;
-                q[*order.begin()].pop();
+                cout << q[line.front()].front() << endl;
+                q[line.front()].pop();
                 //if the line is empty, it looses its place in line
-                if(q[*order.begin()].empty()){
-                    order.erase(order.begin());
+                if(q[line.front()].empty()){
+                    exists.erase(line.front());
+                    line.pop();
                 }
             }
             cin >> command;
         }
         q.clear();
+        exists.clear();
+        clear(line);
         s += 1;
         cin >> t;
         cout << endl;
