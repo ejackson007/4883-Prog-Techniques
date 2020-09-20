@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "stack": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "string": "cpp",
+        "utility": "cpp"
     }
 }
