@@ -1,7 +1,6 @@
-//currently failing because of flawed check. It does check to see if it is legitemately on the next level
-//however this does not account to see if the tree has a possible parent. instead of checking for level
-//there needs to be a check if its parent exists. This is possible by determining if its a left or right
-//child, dividing by 2, and then searching for the presence of that value
+//Current checks to see if it is has a child, as well as if its trying to duplicate a position. Input5 fails because int 
+//cannot hold a number big enough to represent the level value. testing says that a long long int is also too small.....
+//i will revists lol
 #include <iostream>
 #include <string>
 #include <vector>
