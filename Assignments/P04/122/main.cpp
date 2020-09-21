@@ -1,6 +1,18 @@
 //Current checks to see if it is has a child, as well as if its trying to duplicate a position. Input5 fails because int 
 //cannot hold a number big enough to represent the level value. testing says that a long long int is also too small.....
 //i will revists lol
+
+//By adding values, order does not matter, hence LR == LL if L = 1 and R = 2.
+//Multiplication would make the values too big
+//LLLLLLLR and LRLLLLLLL how to make these two different? (earlier rights should have a larger difference).
+//by knowing the length of the string, you can take into account position? decriment backwards and add value so that the leftmost has the gretest values
+
+//LLLLLL = 27
+//LLLLR = 20
+
+//LLLLLLRL = 45
+//LLLLLRLL = 45 //oof
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -32,11 +44,13 @@ int main(){
             //set value, rest will be equal to movement
             value = node.substr(0,pos);
             node.erase(0, pos + 1);
+            int l = node.length();
             for(char movement : node){
                 if(movement == 'L')
-                    i *= 2;
+                    i *=2;
                 else
                     i = i*2 + 1;
+                l--;
             }
             //check if its a duplicate
             if(positions.find(i) != positions.end()){
