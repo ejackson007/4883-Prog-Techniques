@@ -25,15 +25,16 @@ using namespace std;
 
 int main(){
     //create tree with maximum amount of nodes, empty
-    int i = 1, leaves = 0, count = 0, prev = 0;
-    vector<pair <int, int> > tree;
-    set <int> positions;
-    string node, value;
+    int leaves = 0, count = 0;
+    vector<vector<pair <int, string> > > tree;
+    set <string> positions;
+    string node, value, prev = "";
     size_t pos;
     bool valid = true; //node can exist
     //cin first node. If nothing it is end of file
     while(cin >> node){
         //() ends trees
+        tree.resize(256);
         while(node != "()" && valid){
             leaves++;
             //remove ()
@@ -44,41 +45,39 @@ int main(){
             //set value, rest will be equal to movement
             value = node.substr(0,pos);
             node.erase(0, pos + 1);
-            for(char movement : node){
-                if(movement == 'L')
-                    i *=2;
-                else
-                    i = i*2 + 1;
-
-            }
             //check if its a duplicate
-            if(positions.find(i) != positions.end()){
+            if(positions.find(node) != positions.end()){
                 valid = false;
             }
-            tree.push_back(make_pair(stoi(value), i));
-            positions.insert(i);
-            i = 1; //reset iterator
+            tree[node.length()].push_back(make_pair(stoi(value), node));
+            positions.insert(node);
             cin >> node;
         }
         //end of tree. sort by value and print
 
         //sort vector in ascending order by second value in pair
         //https://stackoverflow.com/questions/279854/how-do-i-sort-a-vector-of-pairs-based-on-the-second-element-of-the-pair
-        sort(tree.begin(), tree.end(), [](const pair<int,int> &left, const pair<int,int> &right) {
-            return left.second < right.second;});
+        for(vector<pair <int, string> > &sub : tree){
+            sort(sub.begin(), sub.end(), [](const pair<int,string> &left, const pair<int,string> &right) {
+                return left.second < right.second;});
+        }
 
         //check if first value is a root. 
-        if(valid && tree[0].second == 1){
-            for (pair<int,int> &child : tree){
-                //checks to see if the current leaf is possible, i.e same line or next one
-                //There may be a way to print and do this at the same time.
-                //only way to "rewrite" current line is /r which just moves cursor and therefore 
-                //does not delete the whole row. Worst case (valid) you have to go through vector twice
-                if(child.second != 1 && positions.find(child.second / 2) == positions.end()){
-                    valid = false;
-                    break;
+        if(valid && tree[0].size() != 0){
+            tree.shrink_to_fit();
+            for(vector<pair <int, string> > &sub : tree){
+                for (pair<int,string> &child : sub){
+                    //checks to see if the current leaf is possible, i.e same line or next one
+                    //There may be a way to print and do this at the same time.
+                    //only way to "rewrite" current line is /r which just moves cursor and therefore 
+                    //does not delete the whole row. Worst case (valid) you have to go through vector twice
+                    if(child.second != "" && positions.find(prev) == positions.end()){
+                        valid = false;
+                        break;
+                    }
+                    prev = child.second;
+                    prev.pop_back(); // what the LLRR stuff would be without the previous one
                 }
-                prev = child.second;
             }
         }
         else{
@@ -86,10 +85,12 @@ int main(){
         }
 
         if(valid){
-            for(int j = 0; j < tree.size() - 1; j++){
-                cout << tree[j].first << " ";
+            for(vector<pair <int, string> > &sub : tree){
+                for (pair<int,string> &child : sub){
+                    cout << child.first << " ";
+                }
             }
-            cout << tree.back().first;
+            cout << tree.back().back().first;
         }
         else
             cout << "not complete";
@@ -100,6 +101,6 @@ int main(){
         tree.clear();
         positions.clear();
         valid = true;
-        prev = 0;
+        prev = "";
     }
 }
