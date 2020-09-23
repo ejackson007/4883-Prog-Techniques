@@ -47,24 +47,26 @@ int main(){
         }
         //end of tree. sort by value and print
         tree.shrink_to_fit();
-        //sort vector in ascending order by second value in pair
-        //https://stackoverflow.com/questions/279854/how-do-i-sort-a-vector-of-pairs-based-on-the-second-element-of-the-pair
 
         //check if first value is a root. 
         if(valid && tree[0].size() != 0){
-            for(vector<pair <int, string> > &sub : tree){
-                for (pair<int,string> &child : sub){
+            for(priority_queue<psi, vector<psi>, greater<psi> > &sub : tree){
+                while(!sub.empty()){
                     //checks to see if the current leaf is possible, i.e same line or next one
                     //There may be a way to print and do this at the same time.
                     //only way to "rewrite" current line is /r which just moves cursor and therefore 
                     //does not delete the whole row. Worst case (valid) you have to go through vector twice
-                    prev = child.second;
+                    prev = sub.top().first;
                     if(prev != "")
                         prev.pop_back();
 
                     if(positions.find(prev) == positions.end()){// what the LLRR stuff would be without the last move
                         valid = false;
                         break;
+                    }
+                    else{
+                        toPrint.push_back(sub.top().second);
+                        sub.pop();
                     }
                     
                 }
@@ -75,12 +77,10 @@ int main(){
         }
 
         if(valid){
-            for(vector<pair <int, string> > &sub : tree){
-                for (pair<int,string> &child : sub){
-                    cout << child.first << " ";
-                }
+            for(int i = 0; i < toPrint.size() - 1; i++){
+                cout << toPrint[i] << " ";
             }
-            cout << tree.back().back().first;
+            cout << toPrint.back();
         }
         else
             cout << "not complete";
@@ -90,6 +90,7 @@ int main(){
         count = 0;
         tree.clear();
         positions.clear();
+        toPrint.clear();
         valid = true;
         prev = "";
     }
