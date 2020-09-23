@@ -1,17 +1,5 @@
-//Current checks to see if it is has a child, as well as if its trying to duplicate a position. Input5 fails because int 
-//cannot hold a number big enough to represent the level value. testing says that a long long int is also too small.....
-//i will revists lol
+//Segmentation error happening before any print, therefore it is in insert or sort
 
-//By adding values, order does not matter, hence LR == LL if L = 1 and R = 2.
-//Multiplication would make the values too big
-//LLLLLLLR and LRLLLLLLL how to make these two different? (earlier rights should have a larger difference).
-//by knowing the length of the string, you can take into account position? decriment backwards and add value so that the leftmost has the gretest values
-
-//LLLLLL = 27
-//LLLLR = 20
-
-//LLLLLLRL = 45
-//LLLLLRLL = 45 //oof
 
 #include <iostream>
 #include <string>
@@ -54,29 +42,31 @@ int main(){
             cin >> node;
         }
         //end of tree. sort by value and print
-
+        tree.shrink_to_fit();
         //sort vector in ascending order by second value in pair
         //https://stackoverflow.com/questions/279854/how-do-i-sort-a-vector-of-pairs-based-on-the-second-element-of-the-pair
-        for(vector<pair <int, string> > &sub : tree){
-            sort(sub.begin(), sub.end(), [](const pair<int,string> &left, const pair<int,string> &right) {
+        for(int i = 0; i < tree.size(); i++){//this is causing segmentation error
+            sort(tree[i].begin(), tree[i].end(), [](const pair<int,string> &left, const pair<int,string> &right) {
                 return left.second < right.second;});
         }
 
         //check if first value is a root. 
         if(valid && tree[0].size() != 0){
-            tree.shrink_to_fit();
             for(vector<pair <int, string> > &sub : tree){
                 for (pair<int,string> &child : sub){
                     //checks to see if the current leaf is possible, i.e same line or next one
                     //There may be a way to print and do this at the same time.
                     //only way to "rewrite" current line is /r which just moves cursor and therefore 
                     //does not delete the whole row. Worst case (valid) you have to go through vector twice
-                    if(child.second != "" && positions.find(prev) == positions.end()){
+                    prev = child.second;
+                    if(prev != "")
+                        prev.pop_back();
+
+                    if(positions.find(prev) == positions.end()){// what the LLRR stuff would be without the last move
                         valid = false;
                         break;
                     }
-                    prev = child.second;
-                    prev.pop_back(); // what the LLRR stuff would be without the previous one
+                    
                 }
             }
         }
