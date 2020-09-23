@@ -44,13 +44,11 @@ int main(){
             //set value, rest will be equal to movement
             value = node.substr(0,pos);
             node.erase(0, pos + 1);
-            int l = node.length();
             for(char movement : node){
                 if(movement == 'L')
                     i *=2;
                 else
                     i = i*2 + 1;
-                l--;
             }
             //check if its a duplicate
             if(positions.find(i) != positions.end()){
