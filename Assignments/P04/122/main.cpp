@@ -49,6 +49,7 @@ int main(){
                     i *=2;
                 else
                     i = i*2 + 1;
+
             }
             //check if its a duplicate
             if(positions.find(i) != positions.end()){
