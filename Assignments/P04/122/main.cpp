@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 #include <algorithm> //sort
 #include <set>
 
@@ -11,10 +12,13 @@
 
 using namespace std;
 
+typedef pair<string,int> psi;
+
 int main(){
     //create tree with maximum amount of nodes, empty
     int leaves = 0, count = 0;
-    vector<vector<pair <int, string> > > tree;
+    vector<priority_queue<psi, vector<psi>, greater<psi> > > tree;
+    vector<int> toPrint;
     set <string> positions;
     string node, value, prev = "";
     size_t pos;
@@ -37,7 +41,7 @@ int main(){
             if(positions.find(node) != positions.end()){
                 valid = false;
             }
-            tree[node.length()].push_back(make_pair(stoi(value), node));
+            tree[node.length()].push(make_pair(node, stoi(value)));
             positions.insert(node);
             cin >> node;
         }
@@ -45,10 +49,6 @@ int main(){
         tree.shrink_to_fit();
         //sort vector in ascending order by second value in pair
         //https://stackoverflow.com/questions/279854/how-do-i-sort-a-vector-of-pairs-based-on-the-second-element-of-the-pair
-        for(int i = 0; i < tree.size(); i++){//this is causing segmentation error
-            sort(tree[i].begin(), tree[i].end(), [](const pair<int,string> &left, const pair<int,string> &right) {
-                return left.second < right.second;});
-        }
 
         //check if first value is a root. 
         if(valid && tree[0].size() != 0){
