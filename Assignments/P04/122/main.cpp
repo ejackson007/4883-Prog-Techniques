@@ -14,8 +14,7 @@ using namespace std;
 typedef pair<string,int> psi;
 
 int main(){
-    //create tree with maximum amount of nodes, empty
-    int leaves = 0, count = 0;
+    //https://www.geeksforgeeks.org/priority-queue-of-pairs-in-c-ordered-by-first/
     vector<priority_queue<psi, vector<psi>, greater<psi> > > tree;
     vector<int> toPrint;
     set <string> positions;
@@ -27,7 +26,6 @@ int main(){
         //() ends trees
         tree.resize(256);
         while(node != "()" && valid){
-            leaves++;
             //remove ()
             node.erase(node.begin()); 
             node.pop_back();
@@ -85,8 +83,6 @@ int main(){
             cout << "not complete";
         cout << endl;
         //reset values
-        leaves = 1;
-        count = 0;
         tree.clear();
         positions.clear();
         toPrint.clear();
