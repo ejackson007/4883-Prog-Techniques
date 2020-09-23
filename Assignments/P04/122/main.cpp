@@ -1,5 +1,4 @@
-//Segmentation error happening before any print, therefore it is in insert or sort
-
+//All udebug problems work, however uva does not and idk why
 
 #include <iostream>
 #include <string>
