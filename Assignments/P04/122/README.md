@@ -24,3 +24,13 @@ By some stroke of luck, comparing the two strings is exactly what I had to do. I
 ### Checking viability
 After all of the leaves is inserted, checking to see if the values are possible is fairly trivial. A new vector of integers is created, and the tree vector has all of its values pushed off in order. As each leaf is moved, the positional string has the back popped off, which would give the positional string of its parent. That string is searched for in a set that contains all of the strings seen in, and as long as its valid it is moved. If at any time that string cannot be found, a boolean is marked is invalid. The output is either the vector in order, or `not complete` depending on the condition of the boolean. 
 
+The alogirthm is as follows
+
+1. Initilize variables
+2. cin nodes
+    1. seperate number for shifting
+    2. check if its a duplicate, if so mark tree as invalid
+    3. push pair of string and int to vector to string length position
+3. validate nodes in tree
+4. print off tree if valid, otherwise print "not complete"
+
