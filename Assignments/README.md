@@ -11,3 +11,7 @@
 |  127  | [Solution](/Assignments/P02/127)   | [Parentheses Balance](/Assignments/P02/127/127.pdf)      |
 |  514  | [Solution](/Assignments/P02/514)   | [Parentheses Balance](/Assignments/P02/514/514.pdf)      |
 |  727  | [Solution](/Assignments/P02/727)   | [Parentheses Balance](/Assignments/P02/727/727.pdf)      |
+|  540  | [Solution](/Assignments/P03/540)   | [Team Queue](/Assignments/P03/540/540.pdf)               |
+| 11988 | [Solution](/Assignments/P03/11988) | [Beiju Text](/Assignments/P03/11988/11988.pdf)           |
+|  122  | [Solution](/Assignments/P04/122)   | [Trees on the Level](/Assignments/P04/122/122.pdf)       |
+| 12347 | [Solution](/Assignments/P04/12347) | [Binary Search Tree](/Assignments/P04/12347/12347.pdf)   |
