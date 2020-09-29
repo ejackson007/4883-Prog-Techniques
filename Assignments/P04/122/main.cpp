@@ -1,21 +1,9 @@
-//Current checks to see if it is has a child, as well as if its trying to duplicate a position. Input5 fails because int 
-//cannot hold a number big enough to represent the level value. testing says that a long long int is also too small.....
-//i will revists lol
-
-//By adding values, order does not matter, hence LR == LL if L = 1 and R = 2.
-//Multiplication would make the values too big
-//LLLLLLLR and LRLLLLLLL how to make these two different? (earlier rights should have a larger difference).
-//by knowing the length of the string, you can take into account position? decriment backwards and add value so that the leftmost has the gretest values
-
-//LLLLLL = 27
-//LLLLR = 20
-
-//LLLLLLRL = 45
-//LLLLLRLL = 45 //oof
+//All udebug problems work, however uva does not and idk why
 
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 #include <algorithm> //sort
 #include <set>
 
@@ -23,19 +11,21 @@
 
 using namespace std;
 
+typedef pair<string,int> psi;
+
 int main(){
-    //create tree with maximum amount of nodes, empty
-    int i = 1, leaves = 0, count = 0, prev = 0;
-    vector<pair <int, int> > tree;
-    set <int> positions;
-    string node, value;
+    //https://www.geeksforgeeks.org/priority-queue-of-pairs-in-c-ordered-by-first/
+    vector<priority_queue<psi, vector<psi>, greater<psi> > > tree;
+    vector<int> toPrint;
+    set <string> positions;
+    string node, value, prev = "";
     size_t pos;
     bool valid = true; //node can exist
     //cin first node. If nothing it is end of file
     while(cin >> node){
         //() ends trees
+        tree.resize(256);
         while(node != "()" && valid){
-            leaves++;
             //remove ()
             node.erase(node.begin()); 
             node.pop_back();
@@ -44,41 +34,39 @@ int main(){
             //set value, rest will be equal to movement
             value = node.substr(0,pos);
             node.erase(0, pos + 1);
-            for(char movement : node){
-                if(movement == 'L')
-                    i *=2;
-                else
-                    i = i*2 + 1;
-
-            }
             //check if its a duplicate
-            if(positions.find(i) != positions.end()){
+            if(positions.find(node) != positions.end()){
                 valid = false;
             }
-            tree.push_back(make_pair(stoi(value), i));
-            positions.insert(i);
-            i = 1; //reset iterator
+            tree[node.length()].push(make_pair(node, stoi(value)));
+            positions.insert(node);
             cin >> node;
         }
         //end of tree. sort by value and print
-
-        //sort vector in ascending order by second value in pair
-        //https://stackoverflow.com/questions/279854/how-do-i-sort-a-vector-of-pairs-based-on-the-second-element-of-the-pair
-        sort(tree.begin(), tree.end(), [](const pair<int,int> &left, const pair<int,int> &right) {
-            return left.second < right.second;});
+        tree.shrink_to_fit();
 
         //check if first value is a root. 
-        if(valid && tree[0].second == 1){
-            for (pair<int,int> &child : tree){
-                //checks to see if the current leaf is possible, i.e same line or next one
-                //There may be a way to print and do this at the same time.
-                //only way to "rewrite" current line is /r which just moves cursor and therefore 
-                //does not delete the whole row. Worst case (valid) you have to go through vector twice
-                if(child.second != 1 && positions.find(child.second / 2) == positions.end()){
-                    valid = false;
-                    break;
+        if(valid && tree[0].size() != 0){
+            for(priority_queue<psi, vector<psi>, greater<psi> > &sub : tree){
+                while(!sub.empty()){
+                    //checks to see if the current leaf is possible, i.e same line or next one
+                    //There may be a way to print and do this at the same time.
+                    //only way to "rewrite" current line is /r which just moves cursor and therefore 
+                    //does not delete the whole row. Worst case (valid) you have to go through vector twice
+                    prev = sub.top().first;
+                    if(prev != "")
+                        prev.pop_back();
+
+                    if(positions.find(prev) == positions.end()){// what the LLRR stuff would be without the last move
+                        valid = false;
+                        break;
+                    }
+                    else{
+                        toPrint.push_back(sub.top().second);
+                        sub.pop();
+                    }
+                    
                 }
-                prev = child.second;
             }
         }
         else{
@@ -86,20 +74,19 @@ int main(){
         }
 
         if(valid){
-            for(int j = 0; j < tree.size() - 1; j++){
-                cout << tree[j].first << " ";
+            for(int i = 0; i < toPrint.size() - 1; i++){
+                cout << toPrint[i] << " ";
             }
-            cout << tree.back().first;
+            cout << toPrint.back();
         }
         else
             cout << "not complete";
         cout << endl;
         //reset values
-        leaves = 1;
-        count = 0;
         tree.clear();
         positions.clear();
+        toPrint.clear();
         valid = true;
-        prev = 0;
+        prev = "";
     }
 }
