@@ -12,8 +12,8 @@ pair<double, double> closestPoint(point a, point b, point p){
     point ap = make_pair(p.first - a.first, p.second - a.second);
     point ab = make_pair(b.first - a.first, b.second - a.second);
 
-    int abSquare = pow(ab.first, 2) + pow(ab.second, 2);
-    int dotProd = ap.first * ab.first + ap.second * ab.second;
+    double abSquare = pow(ab.first, 2) + pow(ab.second, 2);
+    double dotProd = ap.first * ab.first + ap.second * ab.second;
 
     double t = dotProd / abSquare;
     return(make_pair(a.first + ab.first*t, a.second + ab.second*t));
