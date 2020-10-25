@@ -43,10 +43,12 @@ int main(){
         poly.resize(polySize);
         for(int i = 0; i < polySize; i++){
             cin >> x >> y; 
-            poly.push_back(point(x,y));
+            poly[i] = point(x,y);
         }
+        cout << poly.size() << endl;
         //define which points are on perimiter. 
-        poly = CH(poly);
+        poly = CH(poly); //i think this might not be working
+        cout << poly.size() << endl;
         peri = perimeter(poly);
         //print
         printf("Region #%d\n", iterations);
