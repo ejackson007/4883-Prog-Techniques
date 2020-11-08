@@ -3,7 +3,10 @@
 
 using namespace std;
 
-void printTowers(vector<vector<int> > hanoi){
+vector<vector<int> > hanoi(3);
+int step = 0, m;
+
+void printTowers(){
     //print A
     if(hanoi[0].size() > 0){
         cout << "A=>   ";
@@ -39,34 +42,46 @@ void printTowers(vector<vector<int> > hanoi){
     }
 }
 
-void hanoiFunc(int n, int from, int to, int aux, vector<vector<int> > hanoi){
-    if (n == 1){
-        //move number
-        hanoi[to].push_back(hanoi[from].back());
-        hanoi[from].pop_back();
-        cout << endl;
-        printTowers(hanoi);
-        return;
-    }
-    hanoiFunc(n-1, from, aux, to, hanoi);
-    //move numbers
+void moveTower(int from, int to){
     hanoi[to].push_back(hanoi[from].back());
     hanoi[from].pop_back();
     cout << endl;
-    printTowers(hanoi);
-    hanoiFunc(n-1, aux, to, from, hanoi);
+    printTowers();
+}
+
+void hanoiFunc(int n, int from, int to, int aux){
+    if(step == m)
+        return;
+    
+    if(n >= 1){
+        hanoiFunc(n-1, from, aux, to);
+        if(step == m)
+            return;
+        step++;
+        moveTower(from, to);
+        hanoiFunc(n-1, aux, to, from);
+    }
 }
 
 int main(){
-    vector<vector<int> > hanoi(3);
-    int n, m;
-    cout << "Enter n and m: ";
+    int n, prob = 0;
     cin >> n >> m;
     //start tower
-    for(int i = n; i > 0; i--){
-        hanoi[0].push_back(i);
+    while(n + m != 0){
+        prob++;
+        for(int i = n; i > 0; i--){
+            hanoi[0].push_back(i);
+        }
+        cout << "Problem #" << prob << "\n\n";
+        printTowers();
+        hanoiFunc(n, 0, 2, 1);
+        //get ready for next go
+        hanoi[0].clear();
+        hanoi[1].clear();
+        hanoi[2].clear();
+        cout << endl;
+        step = 0;
+        cin >> n >> m;
     }
-    printTowers(hanoi);
-    hanoiFunc(n, 0, 2, 1, hanoi);
     return 0;
 }
