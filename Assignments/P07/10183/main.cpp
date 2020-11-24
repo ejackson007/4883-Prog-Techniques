@@ -33,5 +33,4 @@ int main(){
         //read in new value
         cin >> a >> b;
     }
-
 }
